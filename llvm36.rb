@@ -143,6 +143,7 @@ class Llvm36 < Formula
     (buildpath/"tools/lld").install resource("lld") if build.with? "lld"
     (buildpath/"tools/lldb").install resource("lldb") if build.with? "lldb"
     (buildpath/"projects/compiler-rt").install resource("compiler-rt") if build.with? "asan"
+    inreplace "tools/clang/runtime/compiler-rt/Makefile", /CC=\"\$\(ToolDir\)\/clang\" \\/, "\\" if build.with? "asan"
 
     if build.universal?
       ENV.permit_arch_flags
